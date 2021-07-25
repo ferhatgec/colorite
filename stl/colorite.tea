@@ -1,0 +1,94 @@
+[[ stl ]]
+
+// color.tea
+//
+// MIT License
+//
+// Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+// Distributed under the terms of the MIT License.
+//
+
+import tea.green.fmt
+import tea.green.string
+
+import tea.green.type
+import tea.green.vector
+import tea.green.char
+import tea.black.sstream
+
+enum __Color_Types__ = int8 {
+    Light     ,
+    Bold      ,
+    Dim       ,
+    Italic    ,
+    Underlined,
+    Blink     ,
+    RapidBlink,
+    Reverse   ,
+    Hidden     ,
+    // ^^^ 8
+}
+
+enum __Colors__ = int8 {
+    Reset                     ,
+    Black                = 30 ,
+    Red                       ,
+    Green                     ,
+    Yellow                    ,
+    Blue                      ,
+    Magenta                   ,
+    Cyan                      ,
+    White                     , 
+    // ^^ 37
+    Default              = 39 ,
+
+    // Light colors
+    LightBlack           = 90 ,
+    LightRed                  ,
+    LightGreen                ,
+    LightYellow               ,
+    LightBlue                 ,
+    LightMagenta              ,
+    LightCyan                 ,
+    LightWhite                , 
+    // ^^^^^^^ 97
+    LightDefault         = 99 ,
+
+    // Background colors
+    BackgroundBlack      = 40 ,
+    BackgroundRed             ,
+    BackgroundGreen           ,
+    BackgroundYellow          ,
+    BackgroundBlue            ,
+    BackgroundMagenta         ,
+    BackgroundCyan            ,
+    BackgroundWhite           , 
+    // ^^^^^^^^^^^^ 47
+    BackgroundDefault    = 49 ,
+
+    // Background light colors
+    BackgroundLightBlack = 100,
+    BackgroundLightRed        ,
+    BackgroundLightGreen      ,
+    BackgroundLightYellow     ,
+    BackgroundLightBlue       ,
+    BackgroundLightMagenta    ,
+    BackgroundLightCyan       ,
+    BackgroundLightWhite      , 
+    // ^^^^^^^^^^^^^^^^^ 107
+    BackgroundLightDefault=109
+}
+
+module color {
+    fn color#print(__data: string, color: __Colors__, type: __Color_Types__) {
+        [[ cpp ]] {
+            string \
+                data = \
+                "\x1b[" + \
+                cpp_sstream::from_int(type) + \
+                ";" + cpp_sstream::from_int(color) + "m" + __data + "\x1b[0m" ;
+        }
+
+        fmt#print(data)
+    }
+} // color (aka colorized)
