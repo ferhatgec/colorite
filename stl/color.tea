@@ -4,7 +4,7 @@
 //
 // MIT License
 //
-// Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+// Copyright (c) 2021-2022 Ferhat Geçdoğan All Rights Reserved.
 // Distributed under the terms of the MIT License.
 //
 
@@ -80,9 +80,9 @@ enum __Colors__ = int8 {
 }
 
 module color {
-    fn color#print(__data: string, color: __Colors__, type: __Color_Types__) {
+    fn color#print(__data: cstring, color: __Colors__, type: __Color_Types__) {
         [[ cpp ]] {
-            string \
+            cstring \
                 data = \
                 "\x1b[" + \
                 cpp_sstream::from_int(type) + \
